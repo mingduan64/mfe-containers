@@ -8,23 +8,23 @@ services:
       dockerfile: ../../docker/multi/Dockerfile.container
       args:
         - PUBLIC_URI=http://localhost
-        - MARKETING_URI=http://localhost:8081
-        - AUTH_URI=http://localhost:8082
-        - DASHBOARD_URI=http://localhost:8083
+        - MARKETING_URI=http://localhost:8091
+        - AUTH_URI=http://localhost:8092
+        - DASHBOARD_URI=http://localhost:8093
     container_name: mfe-container
     ports:
       - 80:80
 
   marketing:
-    image: mfe-merketing:latest
+    image: mfe-marketing:latest
     build:
       context: ../../packages/marketing
       dockerfile: ../../docker/multi/Dockerfile
       args:
-        - PUBLIC_URI=http://localhost:8081
+        - PUBLIC_URI=http://localhost:8091
     container_name: mfe-marketing
     ports:
-      - 8081:80
+      - 8091:80
   
   auth:
     image: mfe-auth:latest
@@ -32,10 +32,10 @@ services:
       context: ../../packages/auth
       dockerfile: ../../docker/multi/Dockerfile
       args:
-        - PUBLIC_URI=http://localhost:8082
+        - PUBLIC_URI=http://localhost:8092
     container_name: mfe-auth
     ports:
-      - 8082:80
+      - 8092:80
   
   dashboard:
     image: mfe-dashboard:latest
@@ -43,7 +43,7 @@ services:
       context: ../../packages/dashboard
       dockerfile: ../../docker/multi/Dockerfile.dashboard
       args:
-        - PUBLIC_URI=http://localhost:8083
+        - PUBLIC_URI=http://localhost:8093
     container_name: mfe-dashboard
     ports:
-      - 8083:80
+      - 8093:80
