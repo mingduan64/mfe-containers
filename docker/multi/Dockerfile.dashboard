@@ -1,0 +1,12 @@
+# 1. Build
+FROM node:14-alpine3.15 AS build
+WORKDIR /source
+RUN apk add python2 && apk add make && apk add g++
+ARG PUBLIC_URI
+COPY . .
+RUN npm install --force && npm run build
+
+#2. Runtime
+FROM nginx:mainline-alpine3.17-slim
+COPY --from=build /source/dist /usr/share/nginx/html/
+EXPOSE 80
