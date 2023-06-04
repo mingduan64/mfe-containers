@@ -1,5 +1,5 @@
 # 1. Build
-FROM node:16-alpine3.18 AS build
+FROM node:17-alpine AS build
 WORKDIR /source
 COPY package.json package.json
 RUN npm install --force
