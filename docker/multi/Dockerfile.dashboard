@@ -1,7 +1,7 @@
 # 1. Build
-FROM node:14-alpine3.15 AS build
+FROM node:14-alpine AS build
 WORKDIR /source
-RUN apk add python2 && apk add make && apk add g++
+RUN apk add python3 && apk add make && apk add g++
 ARG PUBLIC_URI
 COPY . .
 RUN npm install --force && npm run build
