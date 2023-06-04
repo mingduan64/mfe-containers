@@ -1,5 +1,5 @@
 # 1. Build each micro front ends
-FROM node:16-alpine3.18 AS build-container
+FROM node:17-alpine AS build-container
 WORKDIR /source
 COPY ./container/package.json package.json
 RUN npm install --force
@@ -14,7 +14,7 @@ ARG AUTH_URI=${AUTH_PUBLIC_URI}
 ARG DASHBOARD_URI=${DASHBOARD_PUBLIC_URI}
 RUN npm run build
 
-FROM node:16-alpine3.18 AS build-marketing
+FROM node:17-alpine AS build-marketing
 WORKDIR /source
 COPY ./marketing/package.json package.json
 RUN npm install --force
@@ -23,7 +23,7 @@ ARG MARKETING_PUBLIC_URI
 ARG PUBLIC_URI=${MARKETING_PUBLIC_URI}
 RUN npm run build
 
-FROM node:16-alpine3.18 AS build-auth
+FROM node:17-alpine AS build-auth
 WORKDIR /source
 COPY ./auth/package.json package.json
 RUN npm install --force
@@ -32,9 +32,9 @@ ARG AUTH_PUBLIC_URI
 ARG PUBLIC_URI=${AUTH_PUBLIC_URI}
 RUN npm run build
 
-FROM node:14-alpine3.15 AS build-dashboard
+FROM node:14-alpine AS build-dashboard
 WORKDIR /source
-RUN apk add python2 && apk add make && apk add g++
+RUN apk add python3 && apk add make && apk add g++
 ARG DASHBOARD_PUBLIC_URI
 ARG PUBLIC_URI=${DASHBOARD_PUBLIC_URI}
 COPY ./dashboard .
