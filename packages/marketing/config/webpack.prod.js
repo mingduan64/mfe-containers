@@ -7,7 +7,7 @@ const prodConfig = {
   mode: 'production',
   output: {
     filename: '[name].[contenthash].js',
-    publicPath: '/marketing/latest/',
+    publicPath: `${process.env.PUBLIC_URI}/`,
   },
   plugins: [
     new ModuleFederationPlugin({
