@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  mfe-single:
+    image: mfe-single:latest
+    build:
+      context: ../../packages
+      dockerfile: ../docker/single/Dockerfile
+      args:
+        - AUTH_PUBLIC_URI=/auth
+        - MARKETING_PUBLIC_URI=/marketing
+        - DASHBOARD_PUBLIC_URI=/dashboard
+    container_name: mfe-single
+    ports:
+      - 80:80
